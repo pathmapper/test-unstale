@@ -1,10 +1,6 @@
 name: Remove Labels PR Commit
 
-on:
-  workflow_run:
-    workflows: [🌈 Triage]
-    types:
-      - requested
+on: pull_request_target
 
 permissions:
   contents: read
