@@ -1,0 +1,24 @@
+name: Remove Labels PR Commit
+
+on:
+  workflow_run:
+    workflows: [🌈 Triage]
+    types:
+      - requested
+
+permissions:
+  contents: read
+
+jobs:
+  remove_labels:
+    permissions:
+      pull-requests: write  # for actions-ecosystem/action-remove-labels to remove PR labels
+    if: contains(github.event.workflow_run.labels.*.name, 'stale')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions-ecosystem/action-remove-labels@v1
+        if: ${{ github.event.comment.user.url != 'https://github.com/apps/github-actions' }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          labels: |
+            stale
