@@ -4,7 +4,7 @@ on:
   workflow_run:
     workflows: [🌈 Triage]
     types:
-      - completed
+      - requested
 
 permissions:
   contents: read
@@ -13,7 +13,7 @@ jobs:
   remove_labels:
     permissions:
       pull-requests: write  # for actions-ecosystem/action-remove-labels to remove PR labels
-    if: contains(github.event.workflow_run.labels.*.name, 'stale')
+    if: contains(github.event.pull_request.labels.*.name, 'stale')
     runs-on: ubuntu-latest
     steps:
       - uses: actions-ecosystem/action-remove-labels@v1
