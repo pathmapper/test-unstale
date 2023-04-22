@@ -4,7 +4,7 @@ on:
   workflow_run:
     workflows: [🌈 Triage]
     types:
-      - requested
+      - completed
 
 permissions:
   contents: read
